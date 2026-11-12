@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f3">
+  <title>MINI MOTORS — Give imagination a little horsepower.</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: #1d1d1f;
+      background: #f5f5f3;
+      font-synthesis: none;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .nav {
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1440px;
+      margin: auto;
+      padding: 0 7%;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 13px;
+      font-weight: 850;
+      letter-spacing: .13em;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .brand-mark {
+      width: 23px;
+      height: 23px;
+      background: #1d1d1f;
+      color: white;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 12px;
+      letter-spacing: 0;
+    }
+
+    .nav-right {
+      display: flex;
+      gap: 29px;
+      align-items: center;
+      color: #737373;
+      font-size: 12px;
+    }
+
+    .nav-right a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .nav-pill {
+      color: #1d1d1f;
+      font-weight: 600;
+    }
+
+    main {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 23px 7% 76px;
+    }
+
+    .breadcrumb {
+      font-size: 11px;
+      color: #91918e;
+      margin-bottom: 27px;
+      letter-spacing: .02em;
+    }
+
+    .breadcrumb span {
+      color: #393939;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(330px, .75fr);
+      gap: clamp(42px, 7vw, 110px);
+      align-items: start;
+    }
+
+    .visual {
+      position: sticky;
+      top: 24px;
+      min-width: 0;
+    }
+
+    .showcase {
+      --car: #8caaa2;
+      --car-light: #bed0c9;
+      --car-dark: #4a6b63;
+      position: relative;
+      overflow: hidden;
+      min-height: 570px;
+      border-radius: 24px;
+      background: #e8ebe7;
+      display: flex;
+      flex-direction: column;
+      transition: background .35s ease;
+    }
+
+    .showcase-top {
+      padding: 36px 39px 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      font-size: 10px;
+      font-weight: 750;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .showcase-top p {
+      margin: 9px 0 0;
+      color: #818982;
+      font-size: 12px;
+    }
+
+    .car-wrap {
+      flex: 1;
+      display: grid;
+      place-items: center;
+      padding: 0 13px 10px;
+    }
+
+    .car {
+      width: 100%;
+      max-width: 730px;
+      overflow: visible;
+      filter: drop-shadow(0 28px 20px rgba(43, 52, 45, .13));
+    }
+
+    .car-body {
+      fill: var(--car);
+      transition: fill .35s ease;
+    }
+
+    .car-light {
+      fill: var(--car-light);
+      transition: fill .35s ease;
+    }
+
+    .car-dark {
+      fill: var(--car-dark);
+      transition: fill .35s ease;
+    }
+
+    .showcase-bottom {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      padding: 0 39px 33px;
+    }
+
+    .showcase-bottom p {
+      margin: 0;
+      font-size: 11px;
+      color: #788079;
+      line-height: 1.7;
+    }
+
+    .showcase-bottom strong {
+      display: block;
+      color: #353c37;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .view-tag {
+      border: 1px solid rgba(59, 68, 61, .18);
+      border-radius: 30px;
+      padding: 8px 12px;
+      color: #68716a;
+      font-size: 10px;
+    }
+
+    .visual-note {
+      display: flex;
+      justify-content: space-between;
+      padding: 17px 3px;
+      color: #999b96;
+      font-size: 11px;
+    }
+
+    .visual-note span:last-child {
+      color: #6d726c;
+    }
+
+    .details {
+      padding-top: 6px;
+    }
+
+    .edition {
+      display: inline-flex;
+      gap: 7px;
+      align-items: center;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: #83988e;
+    }
+
+    .edition::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #91aa9c;
+    }
+
+    h1 {
+      font-size: clamp(45px, 5vw, 67px);
+      line-height: 1.05;
+      letter-spacing: -.065em;
+      margin: 19px 0 8px;
+      font-weight: 750;
+    }
+
+    .subtitle {
+      margin: 0;
+      font-size: 16px;
+      color: #777a76;
+      line-height: 1.7;
+    }
+
+    .intro {
+      font-size: 12px;
+      line-height: 1.9;
+      color: #999b97;
+      margin: 20px 0 30px;
+    }
+
+    .divider {
+      height: 1px;
+      border: 0;
+      background: #e2e3df;
+      margin: 0 0 28px;
+    }
+
+    fieldset {
+      border: 0;
+      padding: 0;
+      margin: 0 0 29px;
+      min-width: 0;
+    }
+
+    legend {
+      padding: 0;
+      width: 100%;
+      margin-bottom: 15px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    legend .hint {
+      float: right;
+      color: #8e918c;
+      font-weight: 400;
+      font-size: 11px;
+    }
+
+    .colors {
+      display: flex;
+      gap: 13px;
+      align-items: center;
+    }
+
+    .color-option,
+    .power-option {
+      cursor: pointer;
+    }
+
+    .color-option input,
+    .power-option input {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+    }
+
+    .swatch {
+      display: block;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--swatch);
+      border: 4px solid #f5f5f3;
+      box-shadow: 0 0 0 1px transparent;
+      transition: box-shadow .2s, transform .2s;
+    }
+
+    .color-option input:checked + .swatch {
+      box-shadow: 0 0 0 1.5px #292d29;
+    }
+
+    .color-option:hover .swatch {
+      transform: scale(1.08);
+    }
+
+    input:focus-visible + .swatch,
+    input:focus-visible + .power-card {
+      outline: 3px solid #4878bf;
+      outline-offset: 3px;
+    }
+
+    .power-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9px;
+    }
+
+    .power-card {
+      min-height: 79px;
+      padding: 14px;
+      border: 1px solid #e1e2de;
+      border-radius: 11px;
+      background: rgba(255, 255, 255, .4);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: border-color .2s, background .2s;
+    }
+
+    .power-option input:checked + .power-card {
+      border: 1.5px solid #292d29;
+      background: #fff;
+      padding: 13.5px;
+    }
+
+    .power-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .power-icon {
+      font-size: 15px;
+      color: #8b9690;
+      line-height: 1;
+    }
+
+    .power-price {
+      font-size: 11px;
+      color: #929590;
+    }
+
+    .price-row {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      margin: 0 0 20px;
+    }
+
+    .price-label {
+      font-size: 11px;
+      color: #969993;
+      margin-bottom: 5px;
+    }
+
+    .price {
+      font-size: 25px;
+      font-weight: 700;
+      letter-spacing: -.04em;
+    }
+
+    .price small {
+      font-size: 11px;
+      letter-spacing: 0;
+      font-weight: 500;
+      color: #8a8e88;
+    }
+
+    .price-note {
+      color: #a0a29d;
+      font-size: 10px;
+      padding-bottom: 4px;
+    }
+
+    .cta {
+      width: 100%;
+      padding: 16px;
+      border: 0;
+      border-radius: 10px;
+      background: #202320;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 650;
+      transition: background .2s, transform .2s;
+    }
+
+    .cta:hover {
+      background: #424a43;
+      transform: translateY(-1px);
+    }
+
+    .cta:focus-visible {
+      outline: 3px solid #4878bf;
+      outline-offset: 3px;
+    }
+
+    .cta span {
+      margin-left: 8px;
+    }
+
+    .confirmation {
+      min-height: 18px;
+      margin: 10px 0 0;
+      text-align: center;
+      color: #637d6e;
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
+    .footnote {
+      text-align: center;
+      color: #a3a5a0;
+      font-size: 10px;
+      line-height: 1.7;
+      margin: 11px 0 0;
+    }
+
+    .benefits {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding-top: 30px;
+      color: #898d87;
+      font-size: 10px;
+    }
+
+    .benefits span {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .benefits b {
+      font-size: 15px;
+      color: #79897e;
+      font-weight: 400;
+    }
+
+    footer {
+      border-top: 1px solid #e4e5e1;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 23px 7% 32px;
+      display: flex;
+      justify-content: space-between;
+      color: #a4a6a1;
+      font-size: 10px;
+    }
+
+    @media (max-width: 900px) {
+      .layout {
+        gap: 35px;
+        grid-template-columns: 1fr 340px;
+      }
+
+      .showcase {
+        min-height: 480px;
+      }
+
+      .nav,
+      main,
+      footer {
+        padding-left: 5%;
+        padding-right: 5%;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .nav {
+        height: 58px;
+      }
+
+      .nav-right a {
+        display: none;
+      }
+
+      main {
+        padding-top: 14px;
+      }
+
+      .breadcrumb {
+        margin-bottom: 17px;
+      }
+
+      .layout {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+
+      .visual {
+        position: static;
+      }
+
+      .showcase {
+        min-height: 390px;
+      }
+
+      .showcase-top {
+        padding: 25px 25px 0;
+      }
+
+      .showcase-bottom {
+        padding: 0 25px 24px;
+      }
+
+      .visual-note {
+        padding-bottom: 0;
+      }
+
+      .details {
+        max-width: 550px;
+        width: 100%;
+        margin: auto;
+      }
+
+      h1 {
+        font-size: 52px;
+      }
+
+      footer {
+        gap: 20px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .showcase {
+        min-height: 330px;
+      }
+
+      .power-card {
+        padding: 11px;
+      }
+
+      .power-option input:checked + .power-card {
+        padding: 10.5px;
+      }
+
+      .benefits {
+        flex-wrap: wrap;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <a class="brand" href="#top" aria-label="MINI MOTORS home">
+      <span class="brand-mark">m</span> MINI MOTORS
+    </a>
+    <div class="nav-right">
+      <a href="#configure">Explore the car</a>
+      <span class="nav-pill">Made for curious minds ✳</span>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="breadcrumb">
+      MINI MOTORS &nbsp;/&nbsp; Toy car collection &nbsp;/&nbsp; <span>Mini One</span>
+    </div>
+    <div class="layout">
+      <section class="visual" aria-label="Product preview">
+        <div class="showcase" id="showcase">
+          <div class="showcase-top">
+            <div class="eyebrow">A LITTLE JOY, ON WHEELS.</div>
+            <p>Little car, big imagination.</p>
+          </div>
+          <div class="car-wrap">
+            <svg class="car" viewBox="0 0 720 380" role="img" aria-labelledby="carTitle carDescription">
+              <title id="carTitle">Mini One toy car</title>
+              <desc id="carDescription">Side-view illustration of a sage green, retro-style toy car.</desc>
+              <ellipse cx="360" cy="317" rx="290" ry="25" fill="#52605a" opacity=".15"/>
+              <path class="car-dark" d="M91 245 Q94 225 120 217 L204 202 L250 142 Q270 116 307 113 L439 113 Q477 115 504 147 L547 199 L603 211 Q635 218 639 247 L638 270 Q636 286 618 288 L105 288 Q85 285 86 269 Z"/>
+              <path class="car-body" d="M91 238 Q94 219 123 210 L204 195 L250 136 Q271 108 307 106 L439 106 Q477 108 505 141 L548 192 L607 205 Q637 212 641 240 L641 259 Q640 276 622 278 L102 278 Q87 276 87 259 Z"/>
+              <path class="car-light" d="M205 195 L250 136 Q271 108 307 106 L439 106 Q477 108 505 141 L548 192 Q487 185 430 185 L308 185 Q258 186 205 195 Z"/>
+              <path d="M235 186 L268 143 Q283 125 309 124 L348 124 L348 181 Q291 181 235 186 Z" fill="#405456"/>
+              <path d="M359 124 L437 124 Q467 125 488 150 L514 181 L359 181 Z" fill="#405456"/>
+              <path d="M242 184 L270 148 Q284 131 304 129 L319 129 L274 182 Z M377 129 L411 129 L372 178 L359 178 L359 151 Z" fill="#a7c3c0" opacity=".27"/>
+              <path d="M353 124 L353 181" stroke="#d5ded8" stroke-width="5"/>
+              <path d="M349 193 L349 268 M529 200 L530 264" stroke="#4b625b" stroke-width="2" opacity=".28"/>
+              <path d="M375 207 H401" stroke="#4b625b" stroke-width="5" stroke-linecap="round" opacity=".6"/>
+              <path d="M129 210 Q159 204 194 200" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".28"/>
+              <path d="M588 214 L624 221 Q633 224 635 233 L606 233 Q591 232 588 214 Z" fill="#f7edc9"/>
+              <path d="M91 227 L108 224 L108 241 L89 242 Z" fill="#d97361"/>
+              <rect x="77" y="257" width="42" height="12" rx="6" fill="#d8dcd5"/>
+              <rect x="611" y="257" width="39" height="12" rx="6" fill="#d8dcd5"/>
+              <circle cx="205" cy="269" r="47" fill="#313936"/>
+              <circle cx="205" cy="269" r="34" fill="#59635e"/>
+              <circle cx="205" cy="269" r="26" fill="#e2e6df"/>
+              <circle cx="205" cy="269" r="14" fill="#b2bdb5"/>
+              <circle cx="205" cy="269" r="5" fill="#e8ece6"/>
+              <circle cx="530" cy="269" r="47" fill="#313936"/>
+              <circle cx="530" cy="269" r="34" fill="#59635e"/>
+              <circle cx="530" cy="269" r="26" fill="#e2e6df"/>
+              <circle cx="530" cy="269" r="14" fill="#b2bdb5"/>
+              <circle cx="530" cy="269" r="5" fill="#e8ece6"/>
+              <path d="M184 126 Q196 118 211 120 L223 126" fill="none" stroke="#dbe5dc" stroke-width="3" stroke-linecap="round" opacity=".65"/>
+            </svg>
+          </div>
+          <div class="showcase-bottom">
+            <p><strong id="previewColor">Sage Green</strong>MINI ONE · CLASSIC COLLECTION</p>
+            <span class="view-tag">● &nbsp; Product preview</span>
+          </div>
+        </div>
+        <div class="visual-note">
+          <span>Thoughtfully designed for endless fun.</span>
+          <span>01 / 01</span>
+        </div>
+      </section>
+
+      <section class="details" id="configure" aria-labelledby="productTitle">
+        <div class="edition">THE PLAY COLLECTION</div>
+        <h1 id="productTitle">Mini One.</h1>
+        <p class="subtitle">Give imagination a little horsepower.</p>
+        <p class="intro">
+          Classic lines, endless fun. Choose your favorite color and powertrain,
+          and make every adventure a little more imaginative.
+        </p>
+        <hr class="divider">
+        <fieldset>
+          <legend>Choose a color <span class="hint" id="colorName">Sage Green</span></legend>
+          <div class="colors">
+            <label class="color-option" title="Sage Green">
+              <input type="radio" name="color" value="sage" aria-label="Sage Green" checked>
+              <span class="swatch" style="--swatch: #8caaa2"></span>
+            </label>
+            <label class="color-option" title="Cream White">
+              <input type="radio" name="color" value="cream" aria-label="Cream White">
+              <span class="swatch" style="--swatch: #e5dfce"></span>
+            </label>
+            <label class="color-option" title="Coral Red">
+              <input type="radio" name="color" value="coral" aria-label="Coral Red">
+              <span class="swatch" style="--swatch: #cf8073"></span>
+            </label>
+            <label class="color-option" title="Coastal Blue">
+              <input type="radio" name="color" value="blue" aria-label="Coastal Blue">
+              <span class="swatch" style="--swatch: #819eb6"></span>
+            </label>
+            <label class="color-option" title="Midnight Black">
+              <input type="radio" name="color" value="black" aria-label="Midnight Black">
+              <span class="swatch" style="--swatch: #424a49"></span>
+            </label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Choose a powertrain <span class="hint">Your journey, your choice</span></legend>
+          <div class="power-grid">
+            <label class="power-option">
+              <input type="radio" name="power" value="electric" checked>
+              <span class="power-card">
+                <span class="power-title">Electric <span class="power-icon">ϟ</span></span>
+                <span class="power-price">CAD 1,000</span>
+              </span>
+            </label>
+            <label class="power-option">
+              <input type="radio" name="power" value="gas">
+              <span class="power-card">
+                <span class="power-title">Gas-powered <span class="power-icon">◒</span></span>
+                <span class="power-price">CAD 2,000</span>
+              </span>
+            </label>
+            <label class="power-option">
+              <input type="radio" name="power" value="nuclear">
+              <span class="power-card">
+                <span class="power-title">Nuclear-powered <span class="power-icon">✳</span></span>
+                <span class="power-price">CAD 1,008,612</span>
+              </span>
+            </label>
+            <label class="power-option">
+              <input type="radio" name="power" value="air">
+              <span class="power-card">
+                <span class="power-title">Air-powered <span class="power-icon">≋</span></span>
+                <span class="power-price">CAD ∞</span>
+              </span>
+            </label>
+          </div>
+        </fieldset>
+        <hr class="divider">
+        <div class="price-row">
+          <div>
+            <div class="price-label">Your Mini One</div>
+            <div class="price" id="price" aria-live="polite"><small>CAD</small> 1,000</div>
+          </div>
+          <div class="price-note">Prices in Canadian dollars</div>
+        </div>
+        <button class="cta" id="selectButton" type="button">
+          Choose this car <span aria-hidden="true">↗</span>
+        </button>
+        <p class="confirmation" id="confirmation" role="status" aria-live="polite"></p>
+        <p class="footnote">Concept showcase · Powertrain options are fictional, not real products.</p>
+        <div class="benefits">
+          <span><b>♡</b> Designed for joy</span>
+          <span><b>✧</b> Full of imagination</span>
+          <span><b>◎</b> Little car, big world</span>
+        </div>
+      </section>
+    </div>
+  </main>
+  <footer>
+    <span>© 2026 MINI MOTORS. Made for imagination.</span>
+    <span>Designed for every big dream.</span>
+  </footer>
+  <script>
+    const colors = {
+      sage: {
+        name: 'Sage Green',
+        body: '#8caaa2',
+        light: '#bed0c9',
+        dark: '#4a6b63',
+        background: '#e8ebe7'
+      },
+      cream: {
+        name: 'Cream White',
+        body: '#e5dfce',
+        light: '#f4f0e5',
+        dark: '#a69d88',
+        background: '#eeece5'
+      },
+      coral: {
+        name: 'Coral Red',
+        body: '#cf8073',
+        light: '#e8b2a7',
+        dark: '#94594f',
+        background: '#f1e7e2'
+      },
+      blue: {
+        name: 'Coastal Blue',
+        body: '#819eb6',
+        light: '#b3c9d8',
+        dark: '#526e85',
+        background: '#e5ebee'
+      },
+      black: {
+        name: 'Midnight Black',
+        body: '#424a49',
+        light: '#6f7a76',
+        dark: '#272e2c',
+        background: '#e2e6e2'
+      }
+    };
+
+    const powers = {
+      electric: {
+        name: 'Electric',
+        price: '1,000'
+      },
+      gas: {
+        name: 'Gas-powered',
+        price: '2,000'
+      },
+      nuclear: {
+        name: 'Nuclear-powered',
+        price: '1,008,612'
+      },
+      air: {
+        name: 'Air-powered',
+        price: '∞'
+      }
+    };
+
+    const showcase = document.getElementById('showcase');
+    const confirmation = document.getElementById('confirmation');
+
+    function updateSelection() {
+      const color = colors[document.querySelector('input[name="color"]:checked').value];
+      const power = powers[document.querySelector('input[name="power"]:checked').value];
+      showcase.style.setProperty('--car', color.body);
+      showcase.style.setProperty('--car-light', color.light);
+      showcase.style.setProperty('--car-dark', color.dark);
+      showcase.style.backgroundColor = color.background;
+      document.getElementById('colorName').textContent = color.name;
+      document.getElementById('previewColor').textContent = color.name;
+      document.getElementById('carDescription').textContent = `Side-view illustration of a ${color.name.toLowerCase()}, retro-style toy car.`;
+      document.getElementById('price').innerHTML = `<small>CAD</small> ${power.price}`;
+      confirmation.textContent = '';
+    }
+
+    document.querySelectorAll('input[name="color"], input[name="power"]').forEach(input => input.addEventListener('change', updateSelection));
+    document.getElementById('selectButton').addEventListener('click', () => {
+      const color = colors[document.querySelector('input[name="color"]:checked').value];
+      const power = powers[document.querySelector('input[name="power"]:checked').value];
+      confirmation.textContent = `Selected: ${color.name} · ${power.name} · CAD ${power.price}`;
+    });
+
+    updateSelection();
+  </script>
+</body>
+</html>
