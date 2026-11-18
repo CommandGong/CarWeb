@@ -5,12 +5,11 @@ A responsive, static HTML/CSS resume site ready for Cloudflare Pages.
 ## Files
 - `index.html` — website content
 - `style.css` — design and responsive layout
-- `resume.pdf` — **not included**. Add your own PDF resume before publishing if you want the download buttons to work.
 
 ## Before publishing
 1. Review all descriptions for accuracy; the text is a draft, not a verified complete resume.
-2. Add your PDF as `resume.pdf` in the same folder as `index.html`.
-3. Add your professional email and LinkedIn URL to the contact section.
+2. Add a professional email address or LinkedIn profile to the contact section so visitors can reach you.
+3. Review all role details and technical version numbers for accuracy before publishing.
 4. Avoid publishing private contact information you do not want indexed.
 
 ## iPhone → GitHub
